@@ -1,0 +1,70 @@
+body {
+    background-image: url("ironman.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white; /* Make text white for visibility */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#time, #date {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#text {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#arc {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    background: radial-gradient(circle, #0f0, #000);
+    border-radius: 50%;
+    box-shadow: 0 0 25px #0f0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px #0f0;
+    }
+    50% {
+        box-shadow: 0 0 25px #0f0, 0 0 40px #0f0;
+    }
+    100% {
+        box-shadow: 0 0 10px #0f0;
+    }
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background: #00f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0051ff;
+}
+
+#stopButton {
+    background-color: red;
+}
+
+#refreshButton {
+    background-color: #008CBA;
+}
