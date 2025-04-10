@@ -1,3 +1,4 @@
+// Jarvis 2.0 - Premium Assistant Script
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = "en-US";
 
@@ -6,7 +7,7 @@ const stopButton = document.getElementById("stopButton");
 const arc = document.getElementById("reactor");
 
 let isListening = false;
-let voiceMode = "serious"; // casual or serious
+let voiceMode = "serious";
 let memory = JSON.parse(localStorage.getItem("jarvisMemory")) || {};
 
 function startListening() {
@@ -46,13 +47,11 @@ recognition.onerror = function (event) {
 function speak(text) {
   const speech = new SpeechSynthesisUtterance(text);
   const voices = window.speechSynthesis.getVoices();
-
   let selectedVoice = voices.find(v =>
     voiceMode === "casual"
       ? v.name.toLowerCase().includes("female")
       : v.name.toLowerCase().includes("male")
   );
-
   if (!selectedVoice) selectedVoice = voices[0];
 
   speech.voice = selectedVoice;
@@ -60,9 +59,7 @@ function speak(text) {
   speech.rate = 1;
   arc.classList.add("speaking");
   stopButton.style.display = "block";
-
   window.speechSynthesis.speak(speech);
-
   speech.onend = () => {
     arc.classList.remove("speaking");
     stopButton.style.display = "none";
@@ -70,7 +67,6 @@ function speak(text) {
 }
 
 function processCommand(command) {
-  // Voice Mode
   if (command.includes("casual mode")) {
     voiceMode = "casual";
     speak("Switched to casual mode.");
@@ -82,7 +78,6 @@ function processCommand(command) {
     return;
   }
 
-  // Memory
   if (command.startsWith("remember that")) {
     const fact = command.replace("remember that", "").trim();
     const [key, value] = fact.split(" is ");
@@ -99,7 +94,6 @@ function processCommand(command) {
     return;
   }
 
-  // Reminder in x minutes
   if (command.includes("remind me in")) {
     const mins = parseInt(command.match(/\d+/));
     if (mins) {
@@ -109,7 +103,6 @@ function processCommand(command) {
     return;
   }
 
-  // Reminder at time
   if (command.includes("remind me at")) {
     const match = command.match(/\d{1,2}(:\d{2})?\s?(am|pm)?/);
     if (match) {
@@ -133,17 +126,19 @@ function processCommand(command) {
     return;
   }
 
-  // Date and Time
   if (command.includes("time") || command.includes("date") || command.includes("day")) {
     const now = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const dateString = now.toLocaleDateString(undefined, options);
-    const timeString = now.toLocaleTimeString();
-    speak(`Today is ${dateString}, and the time is ${timeString}`);
+    const date = now.toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+    const time = now.toLocaleTimeString();
+    speak(`Today is ${date}, and the time is ${time}`);
     return;
   }
 
-  // Google Summary
   if (command.includes("according to google")) {
     let short = command.includes("in short");
     let long = command.includes("in long");
@@ -158,17 +153,20 @@ function processCommand(command) {
       .then(res => res.json())
       .then(data => {
         if (data.extract) {
-          const summary = short ? data.extract.split('. ')[0] + '.' : data.extract;
+          const summary = short ? data.extract.split(". ")[0] + "." : data.extract;
           speak(summary);
         } else {
-          speak("I couldn't find anything on that.");
+          speak("I couldn't find anything on that. Opening Google.");
+          window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
         }
       })
-      .catch(() => speak("Failed to fetch info."));
+      .catch(() => {
+        speak("Failed to fetch info. Opening Google.");
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+      });
     return;
   }
 
-  // Math
   if (command.includes("calculate") || command.match(/\d/)) {
     let expr = command
       .replace("calculate", "")
@@ -189,7 +187,6 @@ function processCommand(command) {
     return;
   }
 
-  // Open Websites
   if (command.startsWith("open")) {
     const site = command.replace("open", "").trim();
     const url = site.includes(".") ? `https://${site}` : `https://www.${site}.com`;
@@ -198,7 +195,6 @@ function processCommand(command) {
     return;
   }
 
-  // Fallback
   speak("Sorry, I did not understand that.");
 }
 
