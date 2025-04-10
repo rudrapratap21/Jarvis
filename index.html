@@ -6,29 +6,34 @@
   <title>Jarvis 2.0 by Rudra</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1 class="jarvis-title">Jarvis 2.0</h1>
-    <div class="arc-reactor" id="reactor"></div>
-    <div id="dateTimeDisplay"></div>
+  <div class="hud">
+    <div class="glass-panel">
+      <h1 class="jarvis-title">Jarvis 2.0</h1>
+      <div class="arc-reactor" id="reactor"></div>
+      <div id="dateTimeDisplay"></div>
 
-    <button onclick="startListening()">🎤 Start Listening</button>
-    <button id="stopButton" style="display: none;">⏹ Stop</button>
+      <div class="controls">
+        <button onclick="startListening()">🎤 Start Listening</button>
+        <button id="stopButton" style="display: none;">⏹ Stop</button>
+      </div>
 
-    <p id="output">
-      Say commands like:<br>
-      "According to Google who is Nikola Tesla in short"<br>
-      "Remind me in 2 minutes"<br>
-      "Switch to casual mode"<br>
-      "Calculate 15 percent of 360"
-    </p>
+      <div class="output-wrap">
+        <p id="output">Say something like:<br>
+          "According to Google who is Nikola Tesla in short"<br>
+          "Remind me at 9 PM"<br>
+          "Calculate 30 percent of 200"<br>
+          "Switch to casual mode"
+        </p>
+      </div>
 
-    <footer>
-      <span id="creator">Created by <strong>Rudra Pratap</strong></span>
-    </footer>
+      <footer>
+        <span id="creator">Created by <strong>Rudra Pratap</strong></span>
+      </footer>
+    </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
