@@ -1,100 +1,113 @@
+/* JARVIS-STYLE UI - FRIDAY AI */
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-image: url("ironman.jpg"); /* Add the background image here */
-    background-size: cover; /* Make the image cover the entire background */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    background: radial-gradient(ellipse at center, #010a15 0%, #000 100%);
     color: #0ff;
-    text-align: center;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    text-align: center;
 }
 
 .container {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #0ff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
     width: 95%;
     max-width: 600px;
+    animation: glowFrame 3s ease-in-out infinite alternate;
+}
+
+@keyframes glowFrame {
+    from {
+        box-shadow: 0 0 10px #0ff;
+    }
+    to {
+        box-shadow: 0 0 30px #0ff, 0 0 60px #0ff;
+    }
 }
 
 .jarvis-title {
-    font-size: 2.5rem;
-    text-shadow: 0 0 10px #0ff, 0 0 20px #00f;
+    font-size: 2.8rem;
+    color: #00f6ff;
+    text-shadow: 0 0 15px #00f6ff, 0 0 40px #0099cc;
     margin-bottom: 10px;
 }
 
 .arc-reactor {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     margin: 20px auto;
-    background: radial-gradient(circle, #0f0, #000);
+    background: radial-gradient(circle, #0ff, #003);
     border-radius: 50%;
-    box-shadow: 0 0 25px #0f0;
-    animation: pulse 2s infinite;
+    box-shadow: 0 0 25px #0ff;
+    transition: all 0.3s ease-in-out;
+    animation: pulse 2.5s infinite ease-in-out;
+}
+
+.arc-reactor.speaking {
+    background: radial-gradient(circle, red, #000);
+    box-shadow: 0 0 40px red, 0 0 70px red;
 }
 
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 10px #0f0;
-    }
-    50% {
-        box-shadow: 0 0 25px #0f0, 0 0 40px #0f0;
-    }
-    100% {
-        box-shadow: 0 0 10px #0f0;
-    }
+    0% { box-shadow: 0 0 15px #0ff; }
+    50% { box-shadow: 0 0 40px #0ff, 0 0 60px #0ff; }
+    100% { box-shadow: 0 0 15px #0ff; }
 }
 
 button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    background: #00f;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+    margin: 12px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    background: transparent;
+    color: #0ff;
+    border: 1px solid #0ff;
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #0ff;
 }
 
 button:hover {
-    background: #0051ff;
+    background: #0ff;
+    color: #000;
+    box-shadow: 0 0 20px #0ff;
 }
 
 #output {
     margin-top: 20px;
     font-size: 1.2rem;
-    color: #fff;
-}
-
-footer {
-    margin-top: 30px;
-    font-size: 1rem;
-    color: #0ff;
-    text-shadow: 0 0 8px #0ff;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 10px #0ff;
-    }
-    to {
-        text-shadow: 0 0 20px #0ff, 0 0 30px #00f;
-    }
+    color: #ffffff;
+    text-shadow: 0 0 10px #0ff;
 }
 
 #dateTimeDisplay {
     font-size: 1rem;
     color: #aaa;
     margin-bottom: 15px;
+    text-shadow: 0 0 10px #00ffff;
 }
 
-#refreshButton {
-    background-color: #008CBA;
+footer {
+    margin-top: 30px;
+    font-size: 1rem;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+    animation: glowText 2s ease-in-out infinite alternate;
 }
 
-#stopListenButton {
-    background-color: #FF0000;
-    display: none;
+@keyframes glowText {
+    0% { text-shadow: 0 0 10px #0ff; }
+    100% { text-shadow: 0 0 20px #0ff, 0 0 30px #00f; }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
